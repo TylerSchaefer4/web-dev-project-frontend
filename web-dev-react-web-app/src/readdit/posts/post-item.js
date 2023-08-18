@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import PostStats from "./post-stats";
-import { FaEllipsisH } from "react-icons/fa";
 import blueCheck from "./blueCheck.png";
 import "./index.css";
 import { useDispatch } from "react-redux";
 import { deletePostThunk } from "../services/posts-thunks";
 import teslaLogo from "./images/tesla-logo.png";
 import { useSelector } from "react-redux";
-import { FaArrowUp, FaArrowDown } from "react-icons/fa";
+import {
+  AiOutlineUp,
+  AiFillCaretUp,
+  AiOutlineDown,
+  AiFillCaretDown,
+} from "react-icons/ai";
+
+import { updatePostThunk } from "../services/posts-thunks";
 
 const PostItem = ({
   post = {
@@ -18,12 +24,48 @@ const PostItem = ({
                picks up the Curiosity rover on its 6' bed`,
     replies: 100,
     image: teslaLogo,
+    votes: 0,
   },
 }) => {
   const dispatch = useDispatch();
   const deletePostHandler = (id) => {
     console.log("deleteTuitHandler", id);
     dispatch(deletePostThunk(id));
+  };
+
+  const [userVote, setUserVote] = useState(0); // 1 for like, -1 for dislike, 0 for neutral
+  const [voteCount, setVoteCount] = useState(post.votes || 0);
+
+  const handleLike = () => {
+    let newVoteCount = voteCount;
+
+    if (userVote === 1) {
+      newVoteCount -= 1; // remove the like
+    } else {
+      newVoteCount += 1; // add a like
+    }
+
+    setUserVote(userVote === 1 ? 0 : 1);
+    setVoteCount(newVoteCount);
+
+    // Update the voteCount on the server
+    dispatch(updatePostThunk({ ...post, votes: newVoteCount }));
+  };
+
+  const handleDislike = () => {
+    let newVoteCount = voteCount;
+
+    if (userVote === -1) {
+      newVoteCount += 1; // remove the dislike
+    } else {
+      newVoteCount -= 1; // add a dislike
+    }
+
+    setUserVote(userVote === -1 ? 0 : -1);
+    setVoteCount(newVoteCount);
+
+    // Update the voteCount on the server
+    dispatch(updatePostThunk({ ...post, votes: newVoteCount }));
   };
   const { currentUser } = useSelector((state) => state.user);
   const imageUrl = post.image ? require(`./images/${post.image}`) : teslaLogo;
@@ -32,9 +74,21 @@ const PostItem = ({
       <div className="wd-tuit-icon-header-three-dots-container">
         <div className="wd-tuit-icon-header-container">
           <div className="arrow-container">
-            <FaArrowUp className="up-arrow" />
-            <span className="center-text">hhh</span>
-            <FaArrowDown className="down-arrow" />
+            <div onClick={handleLike}>
+              {userVote === 1 ? (
+                <AiFillCaretUp color={"green"} />
+              ) : (
+                <AiOutlineUp />
+              )}
+            </div>
+            <span className="center-text">{voteCount}</span>
+            <div onClick={handleDislike}>
+              {userVote === -1 ? (
+                <AiFillCaretDown color={"red"} />
+              ) : (
+                <AiOutlineDown />
+              )}
+            </div>
           </div>
 
           <div className="wd-tuit-header">
