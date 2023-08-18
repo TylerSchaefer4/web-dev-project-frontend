@@ -1,0 +1,26 @@
+.custom-btn.selected {
+  background-color: #f0f0f0;
+  border-color: transparent;
+  color: #000;
+}
+
+.custom-btn {
+  background-color: transparent;
+  border-color: transparent;
+  color: #000;
+  border-radius: 20px;
+}
+
+.custom-btn:hover {
+  background-color: #f0f0f0;
+  border-color: transparent;
+  color: #000;
+}
+.rectangle {
+  width: 100%; 
+  /* box-sizing: border-box; */
+}
+
+.container {
+  width: 100%;
+}

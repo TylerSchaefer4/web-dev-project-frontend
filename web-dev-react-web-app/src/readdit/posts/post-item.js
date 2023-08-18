@@ -40,12 +40,19 @@ const PostItem = ({
     let newVoteCount = voteCount;
 
     if (userVote === 1) {
-      newVoteCount -= 1; // remove the like
+      // User is unliking the post (they previously liked it)
+      newVoteCount -= 1;
+      setUserVote(0);
+    } else if (userVote === -1) {
+      // User is changing their vote from dislike to like
+      newVoteCount += 2;
+      setUserVote(1);
     } else {
-      newVoteCount += 1; // add a like
+      // User is liking the post for the first time
+      newVoteCount += 1;
+      setUserVote(1);
     }
 
-    setUserVote(userVote === 1 ? 0 : 1);
     setVoteCount(newVoteCount);
 
     // Update the voteCount on the server
@@ -56,17 +63,25 @@ const PostItem = ({
     let newVoteCount = voteCount;
 
     if (userVote === -1) {
-      newVoteCount += 1; // remove the dislike
+      // User is un-disliking the post (they previously disliked it)
+      newVoteCount += 1;
+      setUserVote(0);
+    } else if (userVote === 1) {
+      // User is changing their vote from like to dislike
+      newVoteCount -= 2;
+      setUserVote(-1);
     } else {
-      newVoteCount -= 1; // add a dislike
+      // User is disliking the post for the first time
+      newVoteCount -= 1;
+      setUserVote(-1);
     }
 
-    setUserVote(userVote === -1 ? 0 : -1);
     setVoteCount(newVoteCount);
 
     // Update the voteCount on the server
     dispatch(updatePostThunk({ ...post, votes: newVoteCount }));
   };
+
   const { currentUser } = useSelector((state) => state.user);
   const imageUrl = post.image ? require(`./images/${post.image}`) : teslaLogo;
   return (

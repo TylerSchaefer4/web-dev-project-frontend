@@ -1,21 +1,48 @@
-import React from "react";
-// import TuitsList from "../tuits/tuits-list";
+import React, { useState } from "react";
 import PostsList from "../posts/posts-list";
+import { FaFire, FaStar, FaClock } from "react-icons/fa";
+import "./index.css";
 function HomeScreen() {
+  const [sortMethod, setSortMethod] = useState("new");
+
+  const sortPosts = (method) => {
+    setSortMethod(method);
+    // api.getPosts({ sort: method }).then(...)
+  };
+
   return (
     <div>
       <h1>Home</h1>
       <div>
-        <div class="container mt-5 mb-5 ">
-          <div class="rectangle p-3 border rounded">
-            <button class="btn btn-primary me-2">New</button>
-            <button class="btn btn-primary me-2">Hot</button>
-            <button class="btn btn-primary">Top</button>
+        <div className="container mt-5 mb-3  border rounded">
+          <div className="rectangle pt-3 pb-3">
+            <button
+              className={`custom-btn me-2 ${
+                sortMethod === "new" ? "selected" : ""
+              }`}
+              onClick={() => sortPosts("new")}
+            >
+              <FaClock /> New
+            </button>
+            <button
+              className={`custom-btn me-2 ${
+                sortMethod === "hot" ? "selected" : ""
+              }`}
+              onClick={() => sortPosts("hot")}
+            >
+              <FaFire /> Hot
+            </button>
+            <button
+              className={`custom-btn ${sortMethod === "top" ? "selected" : ""}`}
+              onClick={() => sortPosts("top")}
+            >
+              <FaStar /> Top
+            </button>
           </div>
         </div>
       </div>
       <div>
-        <PostsList />
+        <PostsList sortMethod={sortMethod} />
         hello
       </div>
     </div>
