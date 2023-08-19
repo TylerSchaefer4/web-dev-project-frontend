@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  findPostByIdThunk,
-} from "../services/post-thunks";
+import { findPostByIdThunk } from "../services/post-thunks";
 
 const initialState = {
   post: null,
@@ -41,7 +39,6 @@ const singlePostSlice = createSlice({
     //   );
     //   state.posts.splice(index, 1);
     // },
-
     // postLikeToggle(state, action) {
     //   const tuit = state.posts.find((tuit) => tuit._id === action.payload._id);
     //   tuit.likes = !tuit.liked ? tuit.likes + 1 : tuit.likes - 1;

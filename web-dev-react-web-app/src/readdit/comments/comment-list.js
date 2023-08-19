@@ -5,12 +5,10 @@ import { useParams } from "react-router";
 import CommentItem from "./comment-item";
 
 const CommentsList = ({post}) => {
-    const loading = false;
   return (
     <ul className="list-group">
-      {loading && <li className="list-group-item">Loading...</li>}
       {post.comments.map((comment) => (
-        <CommentItem key={post._id} comment={comment} />
+        <CommentItem key={post._id} post={post} comment={comment} />
       ))}
     </ul>
   );
