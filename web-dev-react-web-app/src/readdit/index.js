@@ -35,6 +35,8 @@ function Readdit() {
               <Route path="/home" element={<HomeScreen />} />
               <Route path="/explore" element={<h1>Explore</h1>} />
               <Route path="/notifications" element={<h1>Notifications</h1>} />
+              <Route path="/search" element={<HomeScreen />} />
+              <Route path="/search/:criteria" element={<HomeScreen />} />
             </Routes>
           </div>
           <div className="col-xl-3 col-lg-3 d-none d-lg-block">

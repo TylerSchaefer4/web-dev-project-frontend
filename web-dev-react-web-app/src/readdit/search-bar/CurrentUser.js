@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import defaultUserIcon from "./default-user-icon.jpeg";
 import "./index.css";
+import usericon1 from "./user-icons/icon1.jpeg";
 
 function importAll(r) {
   return r.keys().map(r);
@@ -20,7 +21,7 @@ const CurrentUser = ({ user }) => {
     <Link to={isLoggedIn ? `/user/${user.username}` : "/login"}>
       <div className="current-user">
         <img
-          src={isLoggedIn ? randomImage : defaultUserIcon}
+          src={isLoggedIn ? usericon1 : defaultUserIcon}
           alt="User Icon"
           className="user-icon"
         />

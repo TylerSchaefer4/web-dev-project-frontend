@@ -5,10 +5,14 @@ import ReadditLogo from "./readdit-logo.png";
 import CurrentUser from "./CurrentUser.js";
 import { useDispatch } from "react-redux";
 import { setSearchQuery } from "./searchSlice";
+import { useNavigate } from "react-router-dom";
+import { findPostsSearchThunk } from "../services/posts-thunks";
 
 import "./index.css";
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = () => {
+  const navigate = useNavigate();
+
   // Simulating a logged-in user for now:
   const user = {
     username: "john_doe",
@@ -18,11 +22,18 @@ const SearchBar = ({ onSearch }) => {
   const [searchQuery, setSearchInput] = useState("");
   const dispatch = useDispatch();
 
+  //   const handleSearch = (e) => {
+  //     e.preventDefault();
+  //     console.log("searchQuery:", searchQuery);
+  //     console.log("Action:", setSearchQuery(searchQuery));
+  //     dispatch(setSearchQuery(searchQuery));
+  //   };
+
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log("searchQuery:", searchQuery);
-    console.log("Action:", setSearchQuery(searchQuery));
-    dispatch(setSearchQuery(searchQuery));
+    dispatch(findPostsSearchThunk(searchQuery));
+    // navigate(`/search?criteria=${encodeURIComponent(searchQuery)}`);
+    //Need to fix navigation
   };
 
   return (
