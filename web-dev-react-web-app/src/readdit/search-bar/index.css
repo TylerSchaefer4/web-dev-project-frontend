@@ -12,16 +12,15 @@
   }
   
   .search-input {
-    padding-left: 40px !important; 
+    padding-left: 10%; /* Adjust as necessary */
     width: 100%;
   }
   
   .search-icon {
-    left: 10px; 
+    left: 10px; /* Adjust as necessary */
     top: 50%;
     transform: translateY(-50%);
   }
-
   .readdit-link {
     display: flex;
     align-items: center;

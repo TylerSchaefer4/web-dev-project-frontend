@@ -5,10 +5,19 @@ export const findPostsThunk = createAsyncThunk(
   "posts/findPosts",
   async () => await service.findPosts()
 );
+<<<<<<< HEAD
 
 export const findPostsSearchThunk = createAsyncThunk(
   "posts/findPostsSearch",
   async (searchQuery) => await service.findPostsSearch(searchQuery)
+=======
+export const findPostByIdThunk = createAsyncThunk(
+  "posts/findPostById",
+  async (postId) => {
+    const post = await service.findPostById(postId);
+    return post;
+  }
+>>>>>>> 8f6167c (comment page Changes (need fixing))
 );
 export const deletePostThunk = createAsyncThunk(
   "posts/deletePost",

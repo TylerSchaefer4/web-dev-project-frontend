@@ -13,7 +13,7 @@ const PostStats = ({ post }) => {
   const shares = post.shares || 0;
 
   const navigateToCommentsPage = () => {
-    navigate(`/comments/${post._id}`);
+    navigate(`/readdit/comments/${post._id}`);
   };
 
   return (
