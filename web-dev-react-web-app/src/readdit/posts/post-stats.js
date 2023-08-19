@@ -1,78 +1,30 @@
 import React from "react";
-import {
-  FaComment,
-  FaRetweet,
-  FaHeart,
-  FaShareSquare,
-  FaThumbsDown,
-} from "react-icons/fa";
-import { AiFillHeart, AiOutlineHeart, AiFillDislike } from "react-icons/ai";
-// import { updateTuitThunk } from "../services/tuits-thunks";
-import { updatePostThunk } from "../services/posts-thunks";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { FaRegComment, FaRetweet, FaShareSquare } from "react-icons/fa";
+// import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const PostStats = ({ post }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  // Default values
+  const navigate = useNavigate();
+
   const replies = post.replies || 0;
   const retuits = post.retuits || 0;
-  const likes = post.likes || 0;
-  const dislikes = post.dislikes || 0;
   const shares = post.shares || 0;
 
-  const [liked, setLiked] = useState(post.liked);
-  const [disliked, setDisliked] = useState(post.disliked);
-  const [likesCount, setLikesCount] = useState(post.likes || 0);
-  const [dislikesCount, setDislikesCount] = useState(post.dislikes || 0);
-  const handleLike = () => {
-    let newLikes = liked ? likesCount - 1 : likesCount + 1;
-    setLiked(!liked);
-    setLikesCount(newLikes);
-    dispatch(updatePostThunk({ ...post, likes: newLikes, liked: !liked }));
+  const navigateToCommentsPage = () => {
+    navigate(`/comments/${post._id}`);
   };
-
-  const handleDislike = () => {
-    let newDislikes = disliked ? dislikesCount - 1 : dislikesCount + 1;
-    setDisliked(!disliked);
-    setDislikesCount(newDislikes);
-    dispatch(
-      updatePostThunk({ ...post, dislikes: newDislikes, disliked: !disliked })
-    );
-  };
-
-  const likeIcon = post.liked ? (
-    <AiFillHeart color={"red"} />
-  ) : (
-    <AiOutlineHeart />
-  );
-
-  const dislikeIcon = post.disliked ? (
-    <AiFillDislike fill="#0D6EFD" />
-  ) : (
-    <AiFillDislike />
-  );
 
   return (
     <div className="wd-tuit-stats">
       <div className="wd-tuit-stat">
-        <FaComment /> {replies}
+        <button onClick={navigateToCommentsPage} className="comment-button">
+          <FaRegComment /> {replies + " comments"}
+        </button>
       </div>
       <div className="wd-tuit-stat">
         <FaRetweet /> {retuits}
-      </div>
-      <div className="wd-tuit-stat">
-        <div onClick={handleLike}>
-          {liked ? <AiFillHeart color={"red"} /> : <AiOutlineHeart />}
-          <span className="ms-2">{likesCount}</span>
-        </div>
-      </div>
-      <div className="wd-tuit-stat">
-        <div onClick={handleDislike}>
-          {disliked ? <AiFillDislike fill="#0D6EFD" /> : <AiFillDislike />}
-          <span className="ms-2">{dislikesCount}</span>
-        </div>
       </div>
       <div className="wd-tuit-stat">
         <FaShareSquare /> {shares}

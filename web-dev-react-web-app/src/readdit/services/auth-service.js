@@ -32,3 +32,9 @@ export const register = async (user) => {
   console.log(response.data);
   return response.data;
 };
+
+export const findUsers = async () => {
+  const response = await axios.get(USERS_URL);
+  const users = response.data;
+  return users;
+};

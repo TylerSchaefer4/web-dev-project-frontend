@@ -1,3 +1,19 @@
+.truncate {
+    max-width: 70%; /* Maximum width */
+    white-space: nowrap; /* Prevents the text from wrapping */
+    overflow: hidden; /* Hide the overflowing text */
+    text-overflow: ellipsis; /* Show ellipsis when the text overflows */
+  }
+  
+  .row {
+    display: flex; /* Flexbox layout for the row */
+  }
+  
+  .col-8, .col-sm-7 {
+    flex: 1; /* Make the column take up all available space */
+    min-width: 0; /* This is necessary for the truncation to work in a flexbox layout */
+  }
+  
 .rounded-circle {
     width: 100%;
     object-fit: cover;
@@ -6,24 +22,6 @@
   @media (min-width: 576px) {
     .rounded-circle {
       width: 48px;
-    }
-  }
-  
-  .btn {
-    width: 100%;
-  }
-  
-  @media (min-width: 576px) {
-    .btn {
-      width: auto;
-    }
-  }
-  
-  /* Center the content for smaller screens */
-  @media (max-width: 575px) {
-    .row > .col-2, .row > .col-8 {
-      text-align: center;
-      margin-bottom: 10px;
     }
   }
   

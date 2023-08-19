@@ -136,14 +136,39 @@ font-size: medium;
   .wd-tuit-stats {
     padding-top: 8px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Distribute items equally */
+    align-items: center; /* Align items vertically in the center */
     width: 100%;
   }
   
   .wd-tuit-stat {
+    /* flex: 1;  */
     margin: 0 8px;
-    text-align: center;
+    display: flex; /* Making this a flex container */
+    align-items: center; /* Center contents vertically */
+    justify-content: center; /* Center contents horizontally */
+    align-content: center;
   }
+  
+  .comment-button {
+    background-color: #fff;
+    border: none; 
+    border-radius: 6px;
+    padding: 5px;
+    /* margin-bottom: 12px; */
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease; 
+  }
+  
+  .comment-button:hover {
+    background-color: #f0f0f0; 
+  }
+  
+  
+  /* ... the rest of your styles ... */
+  
   
   .wd-tuit-content {
     text-align: left;
@@ -158,8 +183,11 @@ font-size: medium;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: 10px;
+    /* margin-right: 10px; */
+    width: 50px; /* Set the fixed width */
+    min-width: 50px; /* Ensure the width doesn’t shrink smaller than this value */
   }
+  
   
   .up-arrow {
     cursor: pointer;
@@ -175,4 +203,20 @@ font-size: medium;
     font-size: 16px;
     padding: 5px;
   }
+  /* .comment-button {
+    background-color: #fff;
+    border: none; 
+    border-radius: 6px;
+    padding: 5px;
+    margin-bottom: 12px;
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease; 
+  }
+  
+  .comment-button:hover {
+    background-color: #f0f0f0; 
+  } */
+  
   

@@ -1,0 +1,14 @@
+.search-container {
+    display: flex;
+  }
+  
+  .search-input {
+    padding-left: 40px; /* Adjust as necessary */
+  }
+  
+  .search-icon {
+    left: 10px; /* Adjust as necessary */
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
