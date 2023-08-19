@@ -2,19 +2,18 @@ import { useParams } from "react-router";
 import CommentsList from "./comment-list";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { findPostByIdThunk } from "../services/posts-thunks";
+import { findPostByIdThunk } from "../services/post-thunks";
 
 const Comments = () => {
   const dispatch = useDispatch();
   const {post, loading} = useSelector((state) => state.post);
   const { pid } = useParams();
+  dispatch(findPostByIdThunk(pid))
 
   useEffect(() => {
-    const loadPost = async () => {
-      await dispatch(findPostByIdThunk(pid));
-    }
-    loadPost();
-  }, []);
+    console.log("Aasdds")
+    // dispatch(findPostByIdThunk());
+  }, [dispatch]);
 
   return (
     <div>
@@ -25,5 +24,6 @@ const Comments = () => {
     </ul>
     </div>
   );
-};
+}
+
 export default Comments;

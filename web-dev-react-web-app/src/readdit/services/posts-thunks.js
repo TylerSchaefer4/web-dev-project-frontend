@@ -12,7 +12,7 @@ export const findPostsSearchThunk = createAsyncThunk(
   async (searchQuery) => await service.findPostsSearch(searchQuery)
 =======
 export const findPostByIdThunk = createAsyncThunk(
-  "posts/findPostById",
+  "post/findPostById",
   async (postId) => {
     const post = await service.findPostById(postId);
     return post;

@@ -9,9 +9,9 @@ const CommentsList = ({post}) => {
   return (
     <ul className="list-group">
       {loading && <li className="list-group-item">Loading...</li>}
-      {/* {post.comments.map((comment) => ( */}
-        {/* <CommentItem key={post._id} comment={comment} /> */}
-      {/* ))} */}
+      {post.comments.map((comment) => (
+        <CommentItem key={post._id} comment={comment} />
+      ))}
     </ul>
   );
 };

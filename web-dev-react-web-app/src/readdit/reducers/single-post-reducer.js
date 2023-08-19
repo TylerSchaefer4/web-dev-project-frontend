@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   findPostByIdThunk,
-} from "../services/posts-thunks";
+} from "../services/post-thunks";
 
 const initialState = {
   post: null,
@@ -14,7 +14,7 @@ const singlePostSlice = createSlice({
   extraReducers: {
     [findPostByIdThunk.pending]: (state) => {
       state.loading = true;
-      state.posts = [];
+      state.post = null;
     },
     [findPostByIdThunk.fulfilled]: (state, { payload }) => {
       state.loading = false;
