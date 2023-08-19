@@ -14,6 +14,8 @@ const getTimeDifferenceInHours = (timestamp) => {
 
 const PostsList = ({ sortMethod }) => {
   const { posts, loading } = useSelector((state) => state.posts);
+  const searchQuery = useSelector((state) => state.searchQuery.searchQuery);
+
   const dispatch = useDispatch();
 
   const [sortedPosts, setSortedPosts] = useState([]);
@@ -23,7 +25,18 @@ const PostsList = ({ sortMethod }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    let sortedArray = [...posts];
+    let filteredPosts = [...posts];
+
+    if (searchQuery && typeof searchQuery === "string") {
+      const keywords = searchQuery.split(" ");
+      filteredPosts = filteredPosts.filter((post) => {
+        const postContent = post.title + " " + post.post;
+        return keywords.every((keyword) =>
+          postContent.toLowerCase().includes(keyword.toLowerCase())
+        );
+      });
+    }
+    let sortedArray = [...filteredPosts];
 
     switch (sortMethod) {
       case "new":
@@ -44,9 +57,8 @@ const PostsList = ({ sortMethod }) => {
       default:
         break;
     }
-
     setSortedPosts(sortedArray);
-  }, [sortMethod, posts]);
+  }, [sortMethod, posts, searchQuery]);
 
   return (
     <ul className="list-group">

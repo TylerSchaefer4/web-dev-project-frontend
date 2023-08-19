@@ -12,8 +12,14 @@ import RegisterScreen from "./user/register-screen";
 import authReducer from "./reducers/auth-reducer";
 import postsReducer from "./reducers/posts-reducer";
 import SearchBar from "./search-bar";
+import searchReducer from "./search-bar/searchSlice";
 const store = configureStore({
-  reducer: { who: whoReducer, posts: postsReducer, user: authReducer },
+  reducer: {
+    who: whoReducer,
+    posts: postsReducer,
+    user: authReducer,
+    searchQuery: searchReducer,
+  },
 });
 function Readdit() {
   return (
