@@ -12,12 +12,12 @@
   }
   
   .search-input {
-    padding-left: 10%; /* Adjust as necessary */
+    padding-left: 20%; /* Adjust as necessary */
     width: 100%;
   }
   
   .search-icon {
-    left: 10px; /* Adjust as necessary */
+    left: 93%; /* Adjust as necessary */
     top: 50%;
     transform: translateY(-50%);
   }

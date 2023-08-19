@@ -9,21 +9,19 @@ import authReducer from "./reducers/auth-reducer";
 import postsReducer from "./reducers/posts-reducer";
 import singlePostReducer from "./reducers/single-post-reducer";
 import SearchBar from "./search-bar";
-<<<<<<< HEAD
 import searchReducer from "./search-bar/searchSlice";
+import Comments from "./comments";
+
 const store = configureStore({
   reducer: {
     who: whoReducer,
     posts: postsReducer,
     user: authReducer,
     searchQuery: searchReducer,
+    post: singlePostReducer
   },
-=======
-import Comments from "./comments";
-const store = configureStore({
-  reducer: { who: whoReducer, posts: postsReducer, user: authReducer, post: singlePostReducer},
->>>>>>> 8f6167c (comment page Changes (need fixing))
 });
+
 function Readdit() {
   return (
     <Provider store={store}>
