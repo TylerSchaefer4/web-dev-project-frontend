@@ -12,9 +12,8 @@ function HomeScreen() {
 
   return (
     <div>
-      <h1>Home</h1>
       <div>
-        <div className="container mt-5 mb-3  border rounded">
+        <div className="container mt-2 mb-3  border rounded">
           <div className="rectangle pt-3 pb-3">
             <button
               className={`custom-btn me-2 ${
@@ -43,7 +42,6 @@ function HomeScreen() {
       </div>
       <div>
         <PostsList sortMethod={sortMethod} />
-        hello
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ import LoginScreen from "./user/login-screen";
 import RegisterScreen from "./user/register-screen";
 import authReducer from "./reducers/auth-reducer";
 import postsReducer from "./reducers/posts-reducer";
+import SearchBar from "./search-bar";
 const store = configureStore({
   reducer: { who: whoReducer, posts: postsReducer, user: authReducer },
 });
@@ -18,6 +19,7 @@ function Readdit() {
   return (
     <Provider store={store}>
       <div>
+        <SearchBar />
         <div className="row">
           <div className="col-xl-2 col-lg-1 col-md-2 col-sm-2">
             <NavigationSidebar />
