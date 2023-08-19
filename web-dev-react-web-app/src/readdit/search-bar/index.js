@@ -1,21 +1,70 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
-import { GoGear } from "react-icons/go";
+import ReadditLogo from "./readdit-logo.png";
+import CurrentUser from "./CurrentUser.js";
+import { useDispatch } from "react-redux";
+import { setSearchQuery } from "./searchSlice";
+import { useNavigate } from "react-router-dom";
+import { findPostsSearchThunk } from "../services/posts-thunks";
+
 import "./index.css";
 
 const SearchBar = () => {
+  const navigate = useNavigate();
+
+  // Simulating a logged-in user for now:
+  const user = {
+    username: "john_doe",
+    profilePicture: ReadditLogo,
+  };
+
+  const [searchQuery, setSearchInput] = useState("");
+  const dispatch = useDispatch();
+
+  //   const handleSearch = (e) => {
+  //     e.preventDefault();
+  //     console.log("searchQuery:", searchQuery);
+  //     console.log("Action:", setSearchQuery(searchQuery));
+  //     dispatch(setSearchQuery(searchQuery));
+  //   };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    dispatch(findPostsSearchThunk(searchQuery));
+    // navigate(`/search?criteria=${encodeURIComponent(searchQuery)}`);
+    //Need to fix navigation
+  };
+
   return (
     <div>
-      <div className="row mt-2">
-        <div className="col-7 position-relative">
-          <div className="search-container position-relative">
+      <div className=" mt-2 search">
+        <div className="col-7 d-flex align-items-center">
+          <Link
+            to="/readdit/home"
+            className="readdit-link d-flex align-items-center"
+          >
+            <img
+              src={ReadditLogo}
+              alt="Readdit Logo"
+              className="readdit-logo"
+            />
+            <span className="readdit-text">Readdit</span>
+          </Link>
+          <form
+            onSubmit={handleSearch}
+            className="search-container position-relative ml-3"
+          >
             <input
               placeholder="Search Readdit"
               className="form-control rounded-pill search-input"
+              value={searchQuery}
+              onChange={(e) => setSearchInput(e.target.value)}
             />
             <AiOutlineSearch className="search-icon fs-3 position-absolute" />
-          </div>
+          </form>
         </div>
+        <CurrentUser user={user} />
       </div>
     </div>
   );

@@ -1,14 +1,72 @@
+
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
 .search-container {
     display: flex;
+    justify-content: center;
+    width: 100%;
   }
   
   .search-input {
-    padding-left: 40px; /* Adjust as necessary */
+    padding-left: 40px !important; 
+    width: 100%;
   }
   
   .search-icon {
-    left: 10px; /* Adjust as necessary */
+    left: 10px; 
     top: 50%;
     transform: translateY(-50%);
   }
+
+  .readdit-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    padding-right: 20px;
+  }
+  
+  .readdit-icon {
+    font-size: 24px; /* Adjust as necessary */
+  }
+  
+  .readdit-text {
+    margin-left: 10px;
+    font-weight: bold;
+  }
+  
+
+  .readdit-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  .current-user {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid lightgray;
+    border-radius: 6px;
+
+    margin-left: 25px;
+    padding: 5px;
+  }
+  
+  .user-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+ }
+  
+  .user-name {
+    font-weight: bold;
+  }
+  
+  
   

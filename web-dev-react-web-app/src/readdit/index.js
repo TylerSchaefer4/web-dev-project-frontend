@@ -12,8 +12,14 @@ import RegisterScreen from "./user/register-screen";
 import authReducer from "./reducers/auth-reducer";
 import postsReducer from "./reducers/posts-reducer";
 import SearchBar from "./search-bar";
+import searchReducer from "./search-bar/searchSlice";
 const store = configureStore({
-  reducer: { who: whoReducer, posts: postsReducer, user: authReducer },
+  reducer: {
+    who: whoReducer,
+    posts: postsReducer,
+    user: authReducer,
+    searchQuery: searchReducer,
+  },
 });
 function Readdit() {
   return (
@@ -29,6 +35,8 @@ function Readdit() {
               <Route path="/home" element={<HomeScreen />} />
               <Route path="/explore" element={<h1>Explore</h1>} />
               <Route path="/notifications" element={<h1>Notifications</h1>} />
+              <Route path="/search" element={<HomeScreen />} />
+              <Route path="/search/:criteria" element={<HomeScreen />} />
             </Routes>
           </div>
           <div className="col-xl-3 col-lg-3 d-none d-lg-block">

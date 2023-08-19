@@ -16,6 +16,14 @@ export const findPosts = async () => {
   const tuits = response.data;
   return tuits;
 };
+export const findPostsSearch = async (searchQuery) => {
+  const response = await axios.get(
+    `${POSTS_API}/search?searchQuery=${encodeURIComponent(searchQuery)}`
+  );
+  const posts = response.data;
+  return posts;
+};
+
 export const deletePost = async (pid) => {
   const response = await axios.delete(`${POSTS_API}/${pid}`);
   return response.data;

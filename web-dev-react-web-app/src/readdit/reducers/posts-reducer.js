@@ -5,6 +5,7 @@ import {
   deletePostThunk,
   findPostsThunk,
   updatePostThunk,
+  findPostsSearchThunk,
 } from "../services/posts-thunks";
 const initialState = {
   posts: [],
@@ -43,6 +44,19 @@ const postsSlice = createSlice({
       state.loading = false;
       state.error = action.error;
     },
+    [findPostsSearchThunk.pending]: (state) => {
+      state.loading = true;
+      state.posts = [];
+    },
+    [findPostsSearchThunk.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.posts = payload;
+    },
+    [findPostsSearchThunk.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.error;
+    },
+
     [deletePostThunk.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.posts = state.posts.filter((t) => t._id !== payload);

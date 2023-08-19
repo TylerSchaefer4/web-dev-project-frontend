@@ -5,6 +5,11 @@ export const findPostsThunk = createAsyncThunk(
   "posts/findPosts",
   async () => await service.findPosts()
 );
+
+export const findPostsSearchThunk = createAsyncThunk(
+  "posts/findPostsSearch",
+  async (searchQuery) => await service.findPostsSearch(searchQuery)
+);
 export const deletePostThunk = createAsyncThunk(
   "posts/deletePost",
   async (postId) => {
