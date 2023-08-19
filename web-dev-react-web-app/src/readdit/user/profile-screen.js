@@ -25,6 +25,11 @@ function ProfileScreen() {
       setProfile(payload);
     };
 
+    if (!currentUser) {
+      navigate("/readdit/login");
+      return;
+    }
+
     if (!profile) {
       loadProfile();
     }
@@ -70,7 +75,7 @@ function ProfileScreen() {
         className="mr-2"
         onClick={() => {
           dispatch(logoutThunk());
-          navigate("/tuiter/login");
+          navigate("/readdit/login");
         }}
       >
         {" "}

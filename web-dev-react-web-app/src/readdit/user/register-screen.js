@@ -8,14 +8,23 @@ function RegisterScreen() {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [isPremium, setIsPremium] = useState(false); // 1. Add new state
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleRegister = async () => {
     try {
+      const userType = isPremium ? "PREMIUM" : "REGULAR";
       await dispatch(
-        registerThunk({ username, password, firstName, lastName })
+        registerThunk({
+          username,
+          password,
+          firstName,
+          lastName,
+          type: userType,
+        })
       );
-      navigate("/tuiter/profile");
+      navigate("/readdit/profile");
     } catch (error) {
       console.log(error);
     }
@@ -51,6 +60,18 @@ function RegisterScreen() {
         value={lastName}
         onChange={(e) => setLastName(e.target.value)}
       />
+      <div className="form-check mt-3">
+        <input
+          type="checkbox"
+          className="form-check-input"
+          id="premiumCheck"
+          checked={isPremium}
+          onChange={(e) => setIsPremium(e.target.checked)} // 2. Add checkbox that toggles isPremium
+        />
+        <label className="form-check-label" htmlFor="premiumCheck">
+          Register as a PREMIUM user
+        </label>
+      </div>
       <button className="btn btn-primary" onClick={handleRegister}>
         Register
       </button>
