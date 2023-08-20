@@ -36,3 +36,35 @@ export const findUsersThunk = createAsyncThunk("users/findUsers", async () => {
   const users = await authService.findUsers();
   return users;
 });
+export const toggleFollowThunk = createAsyncThunk(
+  "user/toggleFollow",
+  async ({ currentUserId, userIdToToggle, isCurrentlyFollowing }) => {
+    let updatedUser;
+
+    if (isCurrentlyFollowing) {
+      updatedUser = await authService.unfollowUser(
+        currentUserId,
+        userIdToToggle
+      );
+    } else {
+      updatedUser = await authService.followUser(currentUserId, userIdToToggle);
+    }
+
+    return updatedUser;
+  }
+);
+export const fetchFollowersThunk = createAsyncThunk(
+  "user/fetchFollowers",
+  async (userId) => {
+    const followers = await authService.fetchFollowers(userId);
+    return followers;
+  }
+);
+
+export const fetchFollowingThunk = createAsyncThunk(
+  "user/fetchFollowing",
+  async (userId) => {
+    const following = await authService.fetchFollowing(userId);
+    return following;
+  }
+);

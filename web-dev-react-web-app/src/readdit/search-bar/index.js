@@ -32,8 +32,12 @@ const SearchBar = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     dispatch(findPostsSearchThunk(searchQuery));
-    navigate(`/readdit/search?criteria=${encodeURIComponent(searchQuery)}`);
-    //Need to fix navigation
+    console.log("searchQuery:", searchQuery);
+    if (searchQuery === "") {
+      navigate(`/readdit/search`);
+    } else {
+      navigate(`/readdit/search?criteria=${encodeURIComponent(searchQuery)}`);
+    }
   };
 
   return (

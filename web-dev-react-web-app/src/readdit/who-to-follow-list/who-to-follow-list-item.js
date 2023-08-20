@@ -1,7 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./who-to-follow-list.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleFollowThunk } from "../services/auth-thunks";
+import { useState } from "react";
+import { useEffect } from "react";
 
 function importAll(r) {
   return r.keys().map(r);
@@ -15,8 +18,12 @@ const WhoToFollowListItem = ({
     avatarIcon: "nasa-logo.png",
   },
 }) => {
+  const { currentUser } = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
+  const isFollowing = currentUser?.following?.includes(who._id);
+  const [following, setFollowing] = useState(isFollowing);
   const navigate = useNavigate();
-  const currentUser = useSelector((state) => state.user.currentUser);
 
   const handleProfileClick = (profileId) => {
     if (!currentUser) {
@@ -26,12 +33,34 @@ const WhoToFollowListItem = ({
     }
   };
 
+  const handleFollowToggle = () => {
+    if (!currentUser) {
+      alert("You must sign in to follow users.");
+      return;
+    }
+
+    dispatch(
+      toggleFollowThunk({
+        currentUserId: currentUser._id,
+        userIdToToggle: who._id,
+        isCurrentlyFollowing: following, // existing state that keeps track of follow status
+      })
+    );
+
+    setFollowing(!following);
+  };
+
   const images = importAll(
     require.context("./user-icons", false, /\.(png|jpe?g|svg)$/)
   );
   const randomIndex = Math.floor(Math.random() * images.length);
   const randomImage = images[randomIndex];
-
+  useEffect(() => {
+    setFollowing(currentUser?.following?.includes(who._id));
+  }, [currentUser, who._id]);
+  if (currentUser?._id === who._id) {
+    return <></>;
+  }
   return (
     <li className="list-group-item" onClick={() => handleProfileClick(who._id)}>
       <div className="row">
@@ -48,8 +77,14 @@ const WhoToFollowListItem = ({
           <div className="truncate">@{who.firstName}</div>
         </div>
         <div className="col-2 col-sm-2">
-          <button className="btn btn-primary rounded-pill float-end">
-            Follow
+          <button
+            className="btn btn-primary rounded-pill float-end"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleFollowToggle();
+            }}
+          >
+            {following ? "Following" : "Follow"}
           </button>
         </div>
       </div>

@@ -5,14 +5,20 @@ import {
   profileThunk,
   logoutThunk,
   updateUserThunk,
+  fetchFollowersThunk,
+  fetchFollowingThunk,
 } from "../services/auth-thunks";
 import { findPostsThunk } from "../services/posts-thunks";
 import PostList from "./posts/posts-list";
 // import CommentsList from "./comments/comment-list";
 import Comments from "./comments";
+import WhoToFollowListItem from "../who-to-follow-list/who-to-follow-list-item";
 
 function ProfileScreen() {
-  const { currentUser } = useSelector((state) => state.user);
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const followers = useSelector((state) => state.user.followers);
+  const following = useSelector((state) => state.user.following);
+
   const [profile, setProfile] = useState(currentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,20 +29,24 @@ function ProfileScreen() {
   useEffect(() => {
     dispatch(findPostsThunk());
 
-    const loadProfile = async () => {
-      const { payload } = await dispatch(profileThunk());
-      setProfile(payload);
-    };
+    if (currentUser) {
+      dispatch(fetchFollowersThunk(currentUser._id)); // Fetch followers
+      dispatch(fetchFollowingThunk(currentUser._id)); // Fetch following
 
-    if (!currentUser) {
+      const loadProfile = async () => {
+        const { payload } = await dispatch(profileThunk(currentUser._id));
+        setProfile(payload);
+      };
+      if (!profile) {
+        loadProfile();
+      }
+    } else {
       navigate("/readdit/login");
-      return;
     }
 
-    if (!profile) {
-      loadProfile();
-    }
-  }, []);
+    console.log("followers: ", followers);
+    console.log("following: ", following);
+  }, [dispatch, currentUser, navigate, profile]);
   return (
     <div>
       <h1>Profile Screen</h1>
@@ -90,6 +100,30 @@ function ProfileScreen() {
         <PostList />
         <h2>Your comments</h2>
         <Comments />
+
+        <h2>Your followers</h2>
+        <ul
+          className="list-group mt-2"
+          style={{ maxWidth: "350px", margin: "0 auto" }}
+        >
+          {followers &&
+            followers.map((follower) => (
+              <WhoToFollowListItem key={follower._id} who={follower} />
+            ))}
+        </ul>
+        <h2>People you're following</h2>
+        <ul
+          className="list-group mt-2"
+          style={{
+            maxWidth: "350px",
+            margin: "0 auto",
+          }}
+        >
+          {following &&
+            following.map((person) => (
+              <WhoToFollowListItem key={person._id} who={person} />
+            ))}
+        </ul>
       </div>
     </div>
   );
