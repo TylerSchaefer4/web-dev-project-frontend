@@ -11,20 +11,27 @@ function LoginScreen() {
     try {
       console.log("username: ", username);
       console.log("Starting to log in");
-      const result = await dispatch(loginThunk({ username, password }));
 
-      if (result) {
-        // check if result is truthy (not null, undefined, etc.)
-        navigate("/readdit/profile");
-        console.log("logged in");
+      const actionResult = await dispatch(loginThunk({ username, password }));
+
+      if (actionResult.meta.requestStatus === "fulfilled") {
+        if (actionResult.payload) {
+          navigate("/readdit/profile");
+          console.log("logged in");
+        } else {
+          console.error("Login failed. No user returned.");
+          alert("Login failed. Please check your credentials.");
+        }
       } else {
-        console.error("Login failed. No user returned.");
+        console.error("Login error:", actionResult.error);
         alert("Login failed. Please check your credentials.");
       }
     } catch (e) {
-      alert(e);
+      console.error("Login exception:", e);
+      alert("An error occurred during login. Please try again.");
     }
   };
+
   return (
     <div>
       <h1>Login Screen</h1>

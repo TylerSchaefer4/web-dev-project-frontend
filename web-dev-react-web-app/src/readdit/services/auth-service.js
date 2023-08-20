@@ -38,3 +38,23 @@ export const findUsers = async () => {
   const users = response.data;
   return users;
 };
+
+export const followUser = async (currentUserId, userIdToToggle) => {
+  const response = await api.post(`${USERS_URL}/${userIdToToggle}/follow`);
+  return response.data;
+};
+
+export const unfollowUser = async (currentUserId, userIdToToggle) => {
+  const response = await api.post(`${USERS_URL}/${userIdToToggle}/unfollow`);
+  return response.data;
+};
+
+export const fetchFollowers = async (userId) => {
+  const response = await api.get(`${USERS_URL}/${userId}/followers`);
+  return response.data;
+};
+
+export const fetchFollowing = async (userId) => {
+  const response = await api.get(`${USERS_URL}/${userId}/following`);
+  return response.data;
+};
