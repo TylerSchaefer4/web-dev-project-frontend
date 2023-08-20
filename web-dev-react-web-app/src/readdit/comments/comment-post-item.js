@@ -13,7 +13,7 @@ import {
 import { updatePostThunk } from "../services/posts-thunks";
 
 const getTimeDifferenceInHours = (timestamp) => {
-  const currentTime = new Date();   
+  const currentTime = new Date();
   const postTime = new Date(timestamp);
   const differenceInMilliseconds = currentTime - postTime;
   const differenceInHours = differenceInMilliseconds / (1000 * 3600);
@@ -21,7 +21,7 @@ const getTimeDifferenceInHours = (timestamp) => {
   return Math.round(differenceInHours);
 };
 
-const teslaLogo = 'tesla-logo.png';
+const teslaLogo = "tesla-logo.png";
 
 const CommentPostItem = ({
   post = {
@@ -88,7 +88,9 @@ const CommentPostItem = ({
   };
 
   const { currentUser } = useSelector((state) => state.user);
-  const imageUrl = post.image ? require(`../posts/images/${post.image}`) : require(`../posts/images/${teslaLogo}`);
+  const imageUrl = post.image
+    ? require(`../posts/images/${post.image}`)
+    : require(`../posts/images/${teslaLogo}`);
   return (
     <div className="wd-tuit">
       <div className="wd-tuit-icon-header-three-dots-container">
@@ -115,11 +117,11 @@ const CommentPostItem = ({
             <div>
               <img src={imageUrl} className="wd-tuit-icon-img" alt="logo" />
               <span className="wd-tuit-author">
-                r/{post.username || currentUser.firstName}{" "}
+                r/{post.username || "UserUnknown"}{" "}
               </span>
               <span className="wd-tuit-handle">
                 {" "}
-                Posted by u/{post.handle || currentUser.username}{" "}
+                Posted by u/{post.handle || "uu123"}{" "}
               </span>
 
               <span className="wd-tuit-date">

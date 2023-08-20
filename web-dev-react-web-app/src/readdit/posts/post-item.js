@@ -119,7 +119,7 @@ const PostItem = ({
             <div>
               <img src={imageUrl} className="wd-tuit-icon-img" alt="logo" />
               <span className="wd-tuit-author">
-                r/{post.username || currentUser.firstName}{" "}
+                r/{post.username || "UserUnknown"}{" "}
               </span>
               {/* <span className="wd-blue-check">
                 <img
@@ -131,7 +131,7 @@ const PostItem = ({
 
               <span className="wd-tuit-handle">
                 {" "}
-                Posted by u/{post.handle || currentUser.username}{" "}
+                Posted by u/{post.handle || "uu123"}{" "}
               </span>
 
               <span className="wd-tuit-date">

@@ -8,3 +8,19 @@ export const findPostByIdThunk = createAsyncThunk(
     return post;
   }
 );
+
+export const createCommentThunk = createAsyncThunk(
+  "comments/create",
+  async ({ postId, comment }) => {
+    const newComment = await service.createComment(postId, comment);
+    return newComment;
+  }
+);
+
+export const deleteCommentThunk = createAsyncThunk(
+  "comments/delete",
+  async ({ postId, commentId }) => {
+    const status = await service.deleteComment(postId, commentId);
+    return { postId, commentId, status };
+  }
+);
