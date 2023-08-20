@@ -22,7 +22,7 @@ const CurrentUser = ({ user }) => {
   // Pick a random image from the images array
   const randomImage = images[randomIndex];
   return (
-    <Link to={currentUser ? `/user/${currentUser.username}` : "/readdit/login"}>
+    <Link to={currentUser ? `/readdit/profile` : "/readdit/login"}>
       <div className="current-user">
         <img
           src={currentUser ? usericon1 : defaultUserIcon}

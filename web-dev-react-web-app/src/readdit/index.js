@@ -14,6 +14,7 @@ import Comments from "./comments";
 import RegisterScreen from "./user/register-screen";
 import ProfileScreen from "./user/profile-screen";
 import LoginScreen from "./user/login-screen";
+import OtherProfileScreen from "./user/other-profile-screen";
 
 const store = configureStore({
   reducer: {
@@ -45,6 +46,7 @@ function Readdit() {
               <Route path="/register" element={<RegisterScreen />} />
               <Route path="/profile" element={<ProfileScreen />} />
               <Route path="/login" element={<LoginScreen />} />
+              <Route path="/profile/:userId" element={<OtherProfileScreen />} />
             </Routes>
           </div>
           <div className="col-xl-3 col-lg-3 d-none d-lg-block">

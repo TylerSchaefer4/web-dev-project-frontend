@@ -25,3 +25,7 @@
     }
   }
   
+  .list-group-item:hover {
+    border-color: blue;
+  }
+  
