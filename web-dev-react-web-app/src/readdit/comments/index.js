@@ -7,9 +7,9 @@ import CommentPostItem from "./comment-post-item";
 import WhatsHappeningComment from "../whats-happening-comment";
 
 const Comments = () => {
-  const dispatch = useDispatch();
   const { post, loading } = useSelector((state) => state.post);
   const { pid } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(findPostByIdThunk(pid));

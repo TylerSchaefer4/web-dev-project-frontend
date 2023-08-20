@@ -1,9 +1,15 @@
-import { AiFillCaretDown, AiFillCaretUp, AiOutlineUp } from "react-icons/ai";
-import { getTimeDifferenceInHours } from "../posts/post-item";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { deleteCommentThunk } from "../services/post-thunks";
+import { deleteCommentThunk } from "../../services/post-thunks";
 
+export const getTimeDifferenceInHours = (timestamp) => {
+  const currentTime = new Date();
+  const postTime = new Date(timestamp);
+  const differenceInMilliseconds = currentTime - postTime;
+  const differenceInHours = differenceInMilliseconds / (1000 * 3600);
+
+  return Math.round(differenceInHours);
+};
 const CommentItem = ({ post, comment }) => {
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();

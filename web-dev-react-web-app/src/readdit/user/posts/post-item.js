@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import PostStats from "./post-stats";
-import blueCheck from "./blueCheck.png";
 import "./index.css";
 import { useDispatch } from "react-redux";
-import { deletePostThunk } from "../services/posts-thunks";
+import { deletePostThunk } from "../../services/posts-thunks";
 import teslaLogo from "./images/tesla-logo.png";
 import { useSelector } from "react-redux";
 import {
@@ -13,7 +12,7 @@ import {
   AiFillCaretDown,
 } from "react-icons/ai";
 
-import { updatePostThunk } from "../services/posts-thunks";
+import { updatePostThunk } from "../../services/posts-thunks";
 export const getTimeDifferenceInHours = (timestamp) => {
   const currentTime = new Date();
   const postTime = new Date(timestamp);

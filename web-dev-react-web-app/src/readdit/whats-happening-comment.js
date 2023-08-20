@@ -16,7 +16,7 @@ const WhatsHappeningComment = ({ postId }) => {
     const timeStamp = new Date();
     const newComment = {
       content: whatsHappening,
-      author: currentUser.firstName,
+      author: currentUser.username,
       timestamp: timeStamp,
     };
 

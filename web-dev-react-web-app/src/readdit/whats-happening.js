@@ -20,10 +20,13 @@ const WhatsHappening = () => {
     }
     const newPost = {
       post: whatsHappening,
+      timestamp: new Date(),
+      votes: 0,
+      comments: [],
     };
     if (currentUser) {
       newPost.username = currentUser.firstName;
-      newPost.handle = "@" + currentUser.username;
+      newPost.handle = currentUser.username;
     }
     dispatch(createPostThunk(newPost));
     setWhatsHappening("");

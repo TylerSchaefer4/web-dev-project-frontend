@@ -7,6 +7,9 @@ import {
   updateUserThunk,
 } from "../services/auth-thunks";
 import { findPostsThunk } from "../services/posts-thunks";
+import PostList from "./posts/posts-list";
+// import CommentsList from "./comments/comment-list";
+import Comments from "./comments";
 
 function ProfileScreen() {
   const { currentUser } = useSelector((state) => state.user);
@@ -82,6 +85,12 @@ function ProfileScreen() {
         Logout
       </button>
       <button onClick={save}>Save </button>
+      <div>
+        <h2>Your posts</h2>
+        <PostList />
+        <h2>Your comments</h2>
+        <Comments />
+      </div>
     </div>
   );
 }
