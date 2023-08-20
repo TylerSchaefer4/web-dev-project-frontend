@@ -1,24 +1,39 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./who-to-follow-list.css";
+import { useSelector } from "react-redux";
+
 function importAll(r) {
   return r.keys().map(r);
 }
 
 const WhoToFollowListItem = ({
-  who = { username: "NASA", firstName: "NASA", avatarIcon: "nasa-logo.png" },
+  who = {
+    id: "12345",
+    username: "NASA",
+    firstName: "NASA",
+    avatarIcon: "nasa-logo.png",
+  },
 }) => {
-  // const imageUrl = require(`./images/${who.avatarIcon}`);
+  const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.user.currentUser);
+
+  const handleProfileClick = (profileId) => {
+    if (!currentUser) {
+      alert("You must sign in first to view user profiles.");
+    } else {
+      navigate(`/readdit/profile/${profileId}`);
+    }
+  };
+
   const images = importAll(
     require.context("./user-icons", false, /\.(png|jpe?g|svg)$/)
   );
-  // Generate a random index
   const randomIndex = Math.floor(Math.random() * images.length);
-
-  // Pick a random image from the images array
   const randomImage = images[randomIndex];
 
   return (
-    <li className="list-group-item">
+    <li className="list-group-item" onClick={() => handleProfileClick(who._id)}>
       <div className="row">
         <div className="col-2 col-sm-3">
           <img
@@ -41,4 +56,5 @@ const WhoToFollowListItem = ({
     </li>
   );
 };
+
 export default WhoToFollowListItem;
