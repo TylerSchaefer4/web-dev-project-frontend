@@ -11,3 +11,15 @@ export const findPostById = async (pid) => {
   const response = await axios.get(`${POSTS_API}/${pid}`);
   return response.data;
 };
+
+export const createComment = async (postId, comment) => {
+  const response = await axios.post(`${POSTS_API}/${postId}/comments`, comment);
+  return response.data;
+};
+
+export const deleteComment = async (postId, commentId) => {
+  const response = await axios.delete(
+    `${POSTS_API}/${postId}/comments/${commentId}`
+  );
+  return response.data;
+};

@@ -15,7 +15,7 @@ function LoginScreen() {
 
       if (result) {
         // check if result is truthy (not null, undefined, etc.)
-        navigate("profile");
+        navigate("/readdit/profile");
         console.log("logged in");
       } else {
         console.error("Login failed. No user returned.");
@@ -46,8 +46,18 @@ function LoginScreen() {
           onChange={(event) => setPassword(event.target.value)}
         />
       </div>
-      <button className="btn btn-primary mt-2" onClick={handleLogin}>
+      <button
+        style={{ marginRight: "10px" }}
+        className="btn btn-primary mt-2"
+        onClick={handleLogin}
+      >
         Login
+      </button>
+      <button
+        className="btn btn-primary mt-2"
+        onClick={() => navigate("/readdit/register")}
+      >
+        Register
       </button>
     </div>
   );

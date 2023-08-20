@@ -26,7 +26,7 @@ export const getTimeDifferenceInHours = (timestamp) => {
 const PostItem = ({
   post = {
     topic: "Space",
-    userName: "SpaceX",
+    username: "SpaceX",
     time: "2h",
     title: `Tesla CyberTruck lands on Mars and
                picks up the Curiosity rover on its 6' bed`,
@@ -92,6 +92,7 @@ const PostItem = ({
   };
 
   const { currentUser } = useSelector((state) => state.user);
+
   const imageUrl = post.image ? require(`./images/${post.image}`) : teslaLogo;
   return (
     <div className="wd-tuit">
@@ -119,7 +120,7 @@ const PostItem = ({
             <div>
               <img src={imageUrl} className="wd-tuit-icon-img" alt="logo" />
               <span className="wd-tuit-author">
-                r/{post.username || currentUser.firstName}{" "}
+                r/{post.username || "UserUnknown"}{" "}
               </span>
               {/* <span className="wd-blue-check">
                 <img
@@ -131,7 +132,7 @@ const PostItem = ({
 
               <span className="wd-tuit-handle">
                 {" "}
-                Posted by u/{post.handle || currentUser.username}{" "}
+                Posted by u/{post.handle || "uu123"}{" "}
               </span>
 
               <span className="wd-tuit-date">
@@ -145,10 +146,16 @@ const PostItem = ({
           </div>
         </div>
         <div className="">
-          <button
-            className="bi bi-x-lg float-end"
-            onClick={() => deletePostHandler(post._id)}
-          ></button>
+          {/* Here we want to add logic so if a user is the same as the post author than they can delete comments otherwise no.*/}
+          {post.handle ===
+            (currentUser && currentUser.username
+              ? currentUser.username
+              : "ASHJD") && (
+            <button
+              className="bi bi-x-lg float-end"
+              onClick={() => deletePostHandler(post._id)}
+            ></button>
+          )}
         </div>
       </div>
     </div>

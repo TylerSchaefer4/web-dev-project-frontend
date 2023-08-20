@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import CommentPostStats from "./comment-post-stats";
 import "../posts/index.css";
 import { useDispatch } from "react-redux";
-import { deletePostThunk } from "../services/posts-thunks";
 import { useSelector } from "react-redux";
 import {
   AiOutlineUp,
@@ -10,7 +9,7 @@ import {
   AiOutlineDown,
   AiFillCaretDown,
 } from "react-icons/ai";
-import { updatePostThunk } from "../services/posts-thunks";
+import { updatePostThunk } from "../../services/posts-thunks";
 
 const getTimeDifferenceInHours = (timestamp) => {
   const currentTime = new Date();

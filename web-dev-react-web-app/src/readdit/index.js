@@ -11,6 +11,9 @@ import singlePostReducer from "./reducers/single-post-reducer";
 import SearchBar from "./search-bar";
 import searchReducer from "./search-bar/searchSlice";
 import Comments from "./comments";
+import RegisterScreen from "./user/register-screen";
+import ProfileScreen from "./user/profile-screen";
+import LoginScreen from "./user/login-screen";
 
 const store = configureStore({
   reducer: {
@@ -18,7 +21,7 @@ const store = configureStore({
     posts: postsReducer,
     user: authReducer,
     searchQuery: searchReducer,
-    post: singlePostReducer
+    post: singlePostReducer,
   },
 });
 
@@ -39,6 +42,9 @@ function Readdit() {
               <Route path="/notifications" element={<h1>Notifications</h1>} />
               <Route path="/search" element={<HomeScreen />} />
               <Route path="/search/:criteria" element={<HomeScreen />} />
+              <Route path="/register" element={<RegisterScreen />} />
+              <Route path="/profile" element={<ProfileScreen />} />
+              <Route path="/login" element={<LoginScreen />} />
             </Routes>
           </div>
           <div className="col-xl-3 col-lg-3 d-none d-lg-block">

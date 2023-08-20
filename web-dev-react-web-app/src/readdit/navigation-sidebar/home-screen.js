@@ -2,12 +2,20 @@ import React, { useState } from "react";
 import PostsList from "../posts/posts-list";
 import { FaFire, FaStar, FaClock } from "react-icons/fa";
 import "./index.css";
+import WhatsHappening from "../whats-happening";
+import { useSelector } from "react-redux";
 function HomeScreen() {
   const [sortMethod, setSortMethod] = useState("new");
 
+  const { currentUser } = useSelector((state) => state.user);
+
   const sortPosts = (method) => {
+    if (!currentUser) {
+      // user not logged in, show prompt
+      alert("Please login to continue");
+      return;
+    }
     setSortMethod(method);
-    // api.getPosts({ sort: method }).then(...)
   };
 
   return (
@@ -39,6 +47,7 @@ function HomeScreen() {
             </button>
           </div>
         </div>
+        <WhatsHappening />
       </div>
       <div>
         <PostsList sortMethod={sortMethod} />

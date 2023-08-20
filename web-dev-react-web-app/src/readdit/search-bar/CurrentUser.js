@@ -3,11 +3,15 @@ import { Link } from "react-router-dom";
 import defaultUserIcon from "./default-user-icon.jpeg";
 import "./index.css";
 import usericon1 from "./user-icons/icon1.jpeg";
+import { useSelector } from "react-redux";
+import goldenCheckbox from "./golden-check.png";
 
 function importAll(r) {
   return r.keys().map(r);
 }
 const CurrentUser = ({ user }) => {
+  const { currentUser } = useSelector((state) => state.user);
+
   const isLoggedIn = user && user.username;
   const images = importAll(
     require.context("./user-icons", false, /\.(png|jpe?g|svg)$/)
@@ -18,16 +22,24 @@ const CurrentUser = ({ user }) => {
   // Pick a random image from the images array
   const randomImage = images[randomIndex];
   return (
-    <Link to={isLoggedIn ? `/user/${user.username}` : "/login"}>
+    <Link to={currentUser ? `/user/${currentUser.username}` : "/readdit/login"}>
       <div className="current-user">
         <img
-          src={isLoggedIn ? usericon1 : defaultUserIcon}
+          src={currentUser ? usericon1 : defaultUserIcon}
           alt="User Icon"
           className="user-icon"
         />
+
         <span className="user-name">
-          {isLoggedIn ? user.username : "Not Logged In"}
+          {currentUser ? currentUser.username : "Not Logged In"}
         </span>
+        {currentUser && currentUser.type === "PREMIUM" && (
+          <img
+            src={goldenCheckbox}
+            alt="Premium User"
+            className="premium-icon"
+          />
+        )}
       </div>
     </Link>
   );

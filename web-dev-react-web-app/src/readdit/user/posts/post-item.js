@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import CommentPostStats from "./comment-post-stats";
-import "../posts/index.css";
+import PostStats from "./post-stats";
+import "./index.css";
 import { useDispatch } from "react-redux";
-import { deletePostThunk } from "../services/posts-thunks";
+import { deletePostThunk } from "../../services/posts-thunks";
+import teslaLogo from "./images/tesla-logo.png";
 import { useSelector } from "react-redux";
 import {
   AiOutlineUp,
@@ -10,9 +11,9 @@ import {
   AiOutlineDown,
   AiFillCaretDown,
 } from "react-icons/ai";
-import { updatePostThunk } from "../services/posts-thunks";
 
-const getTimeDifferenceInHours = (timestamp) => {
+import { updatePostThunk } from "../../services/posts-thunks";
+export const getTimeDifferenceInHours = (timestamp) => {
   const currentTime = new Date();
   const postTime = new Date(timestamp);
   const differenceInMilliseconds = currentTime - postTime;
@@ -21,12 +22,10 @@ const getTimeDifferenceInHours = (timestamp) => {
   return Math.round(differenceInHours);
 };
 
-const teslaLogo = "tesla-logo.png";
-
-const CommentPostItem = ({
+const PostItem = ({
   post = {
     topic: "Space",
-    userName: "SpaceX",
+    username: "SpaceX",
     time: "2h",
     title: `Tesla CyberTruck lands on Mars and
                picks up the Curiosity rover on its 6' bed`,
@@ -37,6 +36,10 @@ const CommentPostItem = ({
   },
 }) => {
   const dispatch = useDispatch();
+  const deletePostHandler = (id) => {
+    console.log("deleteTuitHandler", id);
+    dispatch(deletePostThunk(id));
+  };
 
   const [userVote, setUserVote] = useState(0); // 1 for like, -1 for dislike, 0 for neutral
   const [voteCount, setVoteCount] = useState(post.votes || 0);
@@ -88,9 +91,8 @@ const CommentPostItem = ({
   };
 
   const { currentUser } = useSelector((state) => state.user);
-  const imageUrl = post.image
-    ? require(`../posts/images/${post.image}`)
-    : require(`../posts/images/${teslaLogo}`);
+
+  const imageUrl = post.image ? require(`./images/${post.image}`) : teslaLogo;
   return (
     <div className="wd-tuit">
       <div className="wd-tuit-icon-header-three-dots-container">
@@ -119,6 +121,14 @@ const CommentPostItem = ({
               <span className="wd-tuit-author">
                 r/{post.username || "UserUnknown"}{" "}
               </span>
+              {/* <span className="wd-blue-check">
+                <img
+                  src={blueCheck}
+                  className="wd-blue-check"
+                  alt="blue check"
+                />
+              </span> */}
+
               <span className="wd-tuit-handle">
                 {" "}
                 Posted by u/{post.handle || "uu123"}{" "}
@@ -131,12 +141,24 @@ const CommentPostItem = ({
             <div>
               <span className="wd-tuit-header-description">{post.post}</span>
             </div>
-            {post && <CommentPostStats post={post} />}
+            {post && <PostStats post={post} />}
           </div>
+        </div>
+        <div className="">
+          {/* Here we want to add logic so if a user is the same as the post author than they can delete comments otherwise no.*/}
+          {post.handle ===
+            (currentUser && currentUser.username
+              ? currentUser.username
+              : "ASHJD") && (
+            <button
+              className="bi bi-x-lg float-end"
+              onClick={() => deletePostHandler(post._id)}
+            ></button>
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default CommentPostItem;
+export default PostItem;
