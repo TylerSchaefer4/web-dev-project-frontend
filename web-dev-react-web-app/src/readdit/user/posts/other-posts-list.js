@@ -6,9 +6,9 @@ import { findPostsThunk } from "../../services/posts-thunks";
 
 const OtherPostsList = ({ userId }) => {
   const whoArray = useSelector((state) => state.who);
-  console.log("whoArray", whoArray);
+  // console.log("whoArray", whoArray);
   const user = whoArray.find((user) => user._id === userId);
-  console.log("user", user);
+  // console.log("user", user);
   // const { userId } = useParams(); // Get userId from route
   const { posts, loading } = useSelector((state) => state.posts);
 
