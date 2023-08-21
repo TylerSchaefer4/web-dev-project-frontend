@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { findPostByIdThunk } from "../services/post-thunks";
 import CommentPostItem from "./comment-post-item";
 import WhatsHappeningComment from "../whats-happening-comment";
+import "styles.css";
 
 const Comments = () => {
   const { post, loading } = useSelector((state) => state.post);
@@ -32,7 +33,13 @@ const Comments = () => {
         {post && <CommentPostItem post={post} />}
       </ul>
       <ul>
-          <span className="counterapi mr-4" style={{minHeight: "44px"}}></span> Unique Views
+        <span
+          className="counterapi mr-4"
+          bg="#000"
+          iconColor="#fff"
+          style={{ minHeight: "44px" }}
+        ></span>{" "}
+        Unique Views
         {post && (
           <h2>
             {post.comments.length} Comment{post.comments.length > 1 ? "s" : ""}
