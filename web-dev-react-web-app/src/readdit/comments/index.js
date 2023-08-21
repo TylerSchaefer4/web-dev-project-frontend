@@ -37,7 +37,7 @@ const Comments = () => {
           bg="#000"
           iconColor="#fff"
           style="min-height:44px"
-          key={post._id}
+          key={pid}
         ></div>{" "}
         Unique Views
         {post && (
