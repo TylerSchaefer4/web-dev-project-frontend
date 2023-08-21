@@ -1,9 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { findPostByIdThunk } from "../services/post-thunks";
+import { createCommentThunk, findPostByIdThunk } from "../services/post-thunks";
 
 const initialState = {
   post: null,
   loading: false,
+};
+
+const currentUser = {
+  author: "NASA",
+};
+
+const templateComment = {
+  ...currentUser,
+  content: "Space",
 };
 
 const singlePostSlice = createSlice({
@@ -22,14 +31,19 @@ const singlePostSlice = createSlice({
       state.loading = false;
       state.error = action.error;
     },
+    [createCommentThunk.fulfilled]: (state, { payload }) => {
+      console.log(payload);
+      state.loading = false;
+      state.post.comments.push(payload);
+        console.log(state.post.comments);
+    },
   },
 
   reducers: {
-    // TODO: Update comments with likes or deleting or creating ? Not entirely sure if we'll have that yet.
     // createComment(state, action) {
     //   state.post.comments.unshift({
     //     ...action.payload,
-    //     ...templatePost,
+    //     ...templateComment,
     //     _id: new Date().getTime(),
     //   });
     // },
