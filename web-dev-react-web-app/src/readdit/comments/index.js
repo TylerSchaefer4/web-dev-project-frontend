@@ -36,7 +36,7 @@ const Comments = () => {
           className="counterapi"
           bg="#000"
           iconColor="#fff"
-          style="min-height:44px"
+          style={{ minHeight: "44px" }}
           key={pid}
         ></div>{" "}
         Unique Views
