@@ -15,12 +15,24 @@ const Comments = () => {
     dispatch(findPostByIdThunk(pid));
   }, [dispatch, pid]);
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://counterapi.com/c.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <div>
       <ul className="list-group mt-2">
         {post && <CommentPostItem post={post} />}
       </ul>
       <ul>
+          <span className="counterapi mr-4" style={{minHeight: "44px"}}></span> Unique Views
         {post && (
           <h2>
             {post.comments.length} Comment{post.comments.length > 1 ? "s" : ""}

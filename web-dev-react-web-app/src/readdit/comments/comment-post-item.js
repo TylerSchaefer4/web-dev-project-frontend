@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import CommentPostStats from "./comment-post-stats";
 import "../posts/index.css";
 import { useDispatch } from "react-redux";

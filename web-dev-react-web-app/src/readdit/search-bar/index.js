@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import ReadditLogo from "./readdit-logo.png";
@@ -28,6 +28,17 @@ const SearchBar = () => {
   //     console.log("Action:", setSearchQuery(searchQuery));
   //     dispatch(setSearchQuery(searchQuery));
   //   };
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://counterapi.com/c.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
