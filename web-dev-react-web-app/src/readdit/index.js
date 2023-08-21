@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router";
+import { Routes, Route } from "react-router-dom";
 import NavigationSidebar from "./navigation-sidebar";
 import HomeScreen from "./navigation-sidebar/home-screen";
 import WhoToFollowList from "./who-to-follow-list";
@@ -15,6 +15,7 @@ import RegisterScreen from "./user/register-screen";
 import ProfileScreen from "./user/profile-screen";
 import LoginScreen from "./user/login-screen";
 import OtherProfileScreen from "./user/other-profile-screen";
+import { Navigate } from "react-router-dom";
 
 const store = configureStore({
   reducer: {
@@ -47,6 +48,7 @@ function Readdit() {
               <Route path="/profile" element={<ProfileScreen />} />
               <Route path="/login" element={<LoginScreen />} />
               <Route path="/profile/:userId" element={<OtherProfileScreen />} />
+              <Route path="*" element={<Navigate to="/home" replace />} />
             </Routes>
           </div>
           <div className="col-xl-3 col-lg-3 d-none d-lg-block">
