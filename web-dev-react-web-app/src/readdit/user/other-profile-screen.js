@@ -24,7 +24,6 @@ function OtherProfileScreen() {
   // Get followers and following from the store
   const followers = useSelector((state) => state.user.followers);
   const following = useSelector((state) => state.user.following);
-
   useEffect(() => {
     dispatch(findPostsThunk());
 
