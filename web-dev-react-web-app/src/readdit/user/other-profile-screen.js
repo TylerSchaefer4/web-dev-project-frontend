@@ -24,19 +24,22 @@ function OtherProfileScreen() {
   // Get followers and following from the store
   const followers = useSelector((state) => state.user.followers);
   const following = useSelector((state) => state.user.following);
+  countapi.visits().then((result) => {
+    console.log(result.value);
+  });
   useEffect(() => {
     dispatch(findPostsThunk());
     // Fetch the followers and following of the user based on userId
     dispatch(fetchFollowersThunk(userId));
     dispatch(fetchFollowingThunk(userId));
-    countapi
-      .hit(`readdit-clone.com`, `user-${userId}`)
-      .then((result) => {
-        setProfileVisits(result.value);
-      })
-      .catch((error) => {
-        console.error("Error with countapi:", error);
-      });
+    // countapi
+    //   .hit(`readdit-clone.com`, `user-${userId}`)
+    //   .then((result) => {
+    //     setProfileVisits(result.value);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error with countapi:", error);
+    //   });
   }, [userId, dispatch]);
   return (
     <div>
