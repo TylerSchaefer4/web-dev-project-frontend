@@ -26,7 +26,6 @@ function OtherProfileScreen() {
   const following = useSelector((state) => state.user.following);
   useEffect(() => {
     dispatch(findPostsThunk());
-
     // Fetch the followers and following of the user based on userId
     dispatch(fetchFollowersThunk(userId));
     dispatch(fetchFollowingThunk(userId));
