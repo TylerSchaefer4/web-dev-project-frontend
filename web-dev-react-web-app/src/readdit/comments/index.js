@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { findPostByIdThunk } from "../services/post-thunks";
 import CommentPostItem from "./comment-post-item";
 import WhatsHappeningComment from "../whats-happening-comment";
-import "styles.css";
 
 const Comments = () => {
   const { post, loading } = useSelector((state) => state.post);
