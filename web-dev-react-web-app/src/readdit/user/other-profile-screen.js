@@ -40,7 +40,6 @@ function OtherProfileScreen() {
         console.error("Error with countapi:", error);
       });
   }, [userId, dispatch]);
-
   return (
     <div>
       <div>
