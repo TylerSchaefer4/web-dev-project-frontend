@@ -33,10 +33,11 @@ const Comments = () => {
       </ul>
       <ul>
         <div
-          className="counterapi mr-4"
+          className="counterapi"
           bg="#000"
           iconColor="#fff"
-          style={{ minHeight: "44px" }}
+          style="min-height:44px"
+          key={post._id}
         ></div>{" "}
         Unique Views
         {post && (
