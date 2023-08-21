@@ -30,7 +30,10 @@ function OtherProfileScreen() {
     dispatch(fetchFollowersThunk(userId));
     dispatch(fetchFollowingThunk(userId));
     countapi
-      .hit(`readdit-clone.com`, `user-${userId}`)
+      .hit(
+        `https://external-api--teal-banoffee-1a6b61.netlify.app`,
+        `user-${userId}`
+      )
       .then((result) => {
         setProfileVisits(result.value);
       })
