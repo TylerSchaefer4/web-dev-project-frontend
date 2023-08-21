@@ -20,7 +20,7 @@ const PostStats = ({ post }) => {
       alert("Please login to before you can look at the comments");
       return;
     }
-    navigate(`/readdit/comments/${post._id}`);
+    navigate(`/readdit/details/${post._id}`);
   };
 
   return (
