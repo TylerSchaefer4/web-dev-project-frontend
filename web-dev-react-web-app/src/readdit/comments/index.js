@@ -32,12 +32,12 @@ const Comments = () => {
         {post && <CommentPostItem post={post} />}
       </ul>
       <ul>
-        <span
+        <div
           className="counterapi mr-4"
           bg="#000"
           iconColor="#fff"
           style={{ minHeight: "44px" }}
-        ></span>{" "}
+        ></div>{" "}
         Unique Views
         {post && (
           <h2>
