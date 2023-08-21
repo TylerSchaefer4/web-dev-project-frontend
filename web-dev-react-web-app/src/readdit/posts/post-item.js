@@ -146,7 +146,6 @@ const PostItem = ({
           </div>
         </div>
         <div className="">
-          {/* Here we want to add logic so if a user is the same as the post author than they can delete comments otherwise no.*/}
           {post.handle ===
             (currentUser && currentUser.username
               ? currentUser.username

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 // import whoArray from "./who.json";
 import { useDispatch, useSelector } from "react-redux";
-
 import { findUsersThunk } from "../services/auth-thunks";
 
 import WhoToFollowListItem from "./who-to-follow-list-item";
