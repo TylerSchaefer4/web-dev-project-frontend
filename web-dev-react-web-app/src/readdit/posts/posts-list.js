@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PostItem from "./post-item";
-import { findPostsThunk } from "../services/posts-thunks";
+import { findPostsSearchThunk, findPostsThunk } from "../services/posts-thunks";
 
 const getTimeDifferenceInHours = (timestamp) => {
   const currentTime = new Date();
@@ -19,6 +19,10 @@ const PostsList = ({ sortMethod }) => {
   const dispatch = useDispatch();
 
   const [sortedPosts, setSortedPosts] = useState([]);
+
+  useEffect(() => {
+    dispatch(findPostsSearchThunk())
+  }, []);
 
   useEffect(() => {
     dispatch(findPostsThunk());
