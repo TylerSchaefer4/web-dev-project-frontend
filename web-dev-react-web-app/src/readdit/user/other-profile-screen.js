@@ -8,9 +8,12 @@ import {
 import { findPostsThunk } from "../services/posts-thunks";
 import OtherPostsList from "./posts/other-posts-list";
 import OtherComments from "./comments/other-index";
-import WhoToFollowListItem from "../who-to-follow-list/who-to-follow-list-item"; // Assuming the same component can be reused
+import WhoToFollowListItem from "../who-to-follow-list/who-to-follow-list-item";
+import { Link } from "react-router-dom";
 
 function OtherProfileScreen() {
+  const currentUser = useSelector((state) => state.user.currentUser);
+
   const { userId } = useParams(); // Get userId from route
   const dispatch = useDispatch();
   const whoArray = useSelector((state) => state.who);
@@ -30,37 +33,48 @@ function OtherProfileScreen() {
 
   return (
     <div>
-      <div>
-        <h2>{user?.firstName}'s posts</h2>
-        <OtherPostsList userId={userId} />
-        <h2>{user?.firstName}'s comments</h2>
-        <OtherComments userId={userId} />
+      <h1>Profile Screen</h1>
+      {currentUser ? (
+        <div>
+          <h2>{user?.firstName}'s posts</h2>
+          <OtherPostsList userId={userId} />
+          <h2>{user?.firstName}'s comments</h2>
+          <OtherComments userId={userId} />
 
-        <h2>{user?.firstName}'s followers</h2>
-        <ul
-          className="list-group mt-2"
-          style={{ maxWidth: "350px", margin: "0 auto" }}
-        >
-          {followers &&
-            followers.map((follower) => (
-              <WhoToFollowListItem key={follower._id} who={follower} />
-            ))}
-        </ul>
+          <h2>{user?.firstName}'s followers</h2>
+          <ul
+            className="list-group mt-2"
+            style={{ maxWidth: "350px", margin: "0 auto" }}
+          >
+            {followers &&
+              followers.map((follower) => (
+                <WhoToFollowListItem key={follower._id} who={follower} />
+              ))}
+          </ul>
 
-        <h2>People {user?.firstName} is following</h2>
-        <ul
-          className="list-group mt-2"
-          style={{
-            maxWidth: "350px",
-            margin: "0 auto",
-          }}
-        >
-          {following &&
-            following.map((person) => (
-              <WhoToFollowListItem key={person._id} who={person} />
-            ))}
-        </ul>
-      </div>
+          <h2>People {user?.firstName} is following</h2>
+          <ul
+            className="list-group mt-2"
+            style={{
+              maxWidth: "350px",
+              margin: "0 auto",
+            }}
+          >
+            {following &&
+              following.map((person) => (
+                <WhoToFollowListItem key={person._id} who={person} />
+              ))}
+          </ul>
+        </div>
+      ) : (
+        // If the currentUser is not present, show a Login button
+        <div>
+          <p>You must be logged in to view profiles.</p>
+          <Link to="/readdit/login">
+            <button>Login</button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

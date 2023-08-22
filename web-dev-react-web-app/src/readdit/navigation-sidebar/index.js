@@ -32,11 +32,11 @@ const NavigationSidebar = () => {
 
   const links = [
     { name: "home", icon: faHome },
-    { name: "explore", icon: faCompass },
-    { name: "notifications", icon: faBell },
-    { name: "messages", icon: faEnvelope },
-    { name: "bookmarks", icon: faBookmark },
-    { name: "lists", icon: faClipboardList },
+    // { name: "explore", icon: faCompass },
+    // { name: "notifications", icon: faBell },
+    // { name: "messages", icon: faEnvelope },
+    // { name: "bookmarks", icon: faBookmark },
+    // { name: "lists", icon: faClipboardList },
     { name: "profile", icon: faUser },
     { name: "more", icon: faEllipsisH },
   ];
