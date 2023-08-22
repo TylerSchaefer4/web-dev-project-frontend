@@ -26,11 +26,13 @@ const WhoToFollowListItem = ({
   const navigate = useNavigate();
 
   const handleProfileClick = (profileId) => {
-    if (!currentUser) {
-      alert("You must sign in first to view user profiles.");
-    } else {
-      navigate(`/readdit/profile/${profileId}`);
-    }
+    // if (!currentUser) {
+    //   alert("You must sign in first to view user profiles.");
+    // } else {
+    //   navigate(`/readdit/profile/${profileId}`);
+    // }
+
+    navigate(`/readdit/profile/${profileId}`);
   };
 
   const handleFollowToggle = () => {
@@ -53,7 +55,7 @@ const WhoToFollowListItem = ({
   const images = importAll(
     require.context("./user-icons", false, /\.(png|jpe?g|svg)$/)
   );
-  const randomIndex = Math.floor(Math.random() * images.length);
+  const randomIndex = who?.iconId ?? Math.floor(Math.random() * images.length);
   const randomImage = images[randomIndex];
   useEffect(() => {
     setFollowing(currentUser?.following?.includes(who._id));

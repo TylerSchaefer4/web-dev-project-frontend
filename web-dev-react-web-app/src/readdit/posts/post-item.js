@@ -6,6 +6,10 @@ import { useDispatch } from "react-redux";
 import { deletePostThunk } from "../services/posts-thunks";
 import teslaLogo from "./images/tesla-logo.png";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { findUsersThunk } from "../services/auth-thunks";
+import { useEffect } from "react";
+
 import {
   AiOutlineUp,
   AiFillCaretUp,
@@ -14,6 +18,11 @@ import {
 } from "react-icons/ai";
 
 import { updatePostThunk } from "../services/posts-thunks";
+
+function importAll(r) {
+  return r.keys().map(r);
+}
+
 export const getTimeDifferenceInHours = (timestamp) => {
   const currentTime = new Date();
   const postTime = new Date(timestamp);
@@ -41,6 +50,15 @@ const PostItem = ({
     console.log("deleteTuitHandler", id);
     dispatch(deletePostThunk(id));
   };
+
+  useEffect(() => {
+    // Dispatch an action to fetch all users.
+    dispatch(findUsersThunk());
+  }, [dispatch]);
+
+  const allUsers = useSelector((state) => state.user.users);
+
+  const matchedUser = allUsers.find((user) => user.username === post.handle);
 
   const [userVote, setUserVote] = useState(0); // 1 for like, -1 for dislike, 0 for neutral
   const [voteCount, setVoteCount] = useState(post.votes || 0);
@@ -91,7 +109,13 @@ const PostItem = ({
     dispatch(updatePostThunk({ ...post, votes: newVoteCount }));
   };
 
+  const images = importAll(
+    require.context("./user-icons", false, /\.(png|jpe?g|svg)$/)
+  );
   const { currentUser } = useSelector((state) => state.user);
+  const num = matchedUser?.iconId ?? Math.floor(Math.random() * 10) + 1;
+  // const randomIndex = matchedUser.iconId;
+  const randomImage = images[num];
 
   const imageUrl = post.image ? require(`./images/${post.image}`) : teslaLogo;
   return (
@@ -118,22 +142,33 @@ const PostItem = ({
 
           <div className="wd-tuit-header">
             <div>
-              <img src={imageUrl} className="wd-tuit-icon-img" alt="logo" />
+              <img src={randomImage} className="wd-tuit-icon-img" alt="logo" />
               <span className="wd-tuit-author">
-                r/{post.username || "UserUnknown"}{" "}
+                {matchedUser && (
+                  <Link to={`/readdit/profile/${matchedUser._id}`}>
+                    r/{post.username || "UserUnknown"}
+                  </Link>
+                )}{" "}
               </span>
-              {/* <span className="wd-blue-check">
-                <img
-                  src={blueCheck}
-                  className="wd-blue-check"
-                  alt="blue check"
-                />
-              </span> */}
+              {!matchedUser && (
+                <span className="wd-tuit-author">
+                  r/{post.username || "UserUnknown"}{" "}
+                </span>
+              )}
 
               <span className="wd-tuit-handle">
-                {" "}
-                Posted by u/{post.handle || "uu123"}{" "}
+                {matchedUser && (
+                  <Link to={`/readdit/profile/${matchedUser._id}`}>
+                    Posted by u/{post.handle || "uu123"}
+                  </Link>
+                )}{" "}
               </span>
+              {!matchedUser && (
+                <span className="wd-tuit-handle">
+                  {" "}
+                  Posted by u/{post.handle || "uu123"}{" "}
+                </span>
+              )}
 
               <span className="wd-tuit-date">
                 {getTimeDifferenceInHours(post.timestamp) || " 1"} hours ago

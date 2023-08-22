@@ -8,6 +8,7 @@ import {
   toggleFollowThunk,
   fetchFollowersThunk,
   fetchFollowingThunk,
+  findUsersThunk,
 } from "../services/auth-thunks";
 
 const authSlice = createSlice({
@@ -16,6 +17,7 @@ const authSlice = createSlice({
     currentUser: null,
     followers: [],
     following: [],
+    users: [],
   },
   reducers: {},
   extraReducers: {
@@ -37,6 +39,10 @@ const authSlice = createSlice({
     [profileThunk.pending]: (state, action) => {
       state.currentUser = null;
     },
+    [findUsersThunk.fulfilled]: (state, { payload }) => {
+      state.users = payload;
+    },
+
     [updateUserThunk.fulfilled]: (state, { payload }) => {
       state.currentUser = payload;
     },

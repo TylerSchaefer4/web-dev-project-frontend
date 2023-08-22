@@ -15,6 +15,9 @@ function RegisterScreen() {
   const handleRegister = async () => {
     try {
       const userType = isPremium ? "PREMIUM" : "REGULAR";
+
+      //I want a random number between 1 and 11
+      const randomIndex = Math.floor(Math.random() * 11) + 1;
       await dispatch(
         registerThunk({
           username,
@@ -22,6 +25,7 @@ function RegisterScreen() {
           firstName,
           lastName,
           type: userType,
+          iconId: randomIndex.toString(),
         })
       );
       navigate("/readdit/profile");

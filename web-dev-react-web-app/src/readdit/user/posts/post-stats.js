@@ -15,11 +15,11 @@ const PostStats = ({ post }) => {
   const shares = post.shares || 0;
 
   const navigateToCommentsPage = () => {
-    if (!currentUser) {
-      // user not logged in, show prompt
-      alert("Please login to before you can look at the comments");
-      return;
-    }
+    // if (!currentUser) {
+    //   // user not logged in, show prompt
+    //   alert("Please login to before you can look at the comments");
+    //   return;
+    // }
     navigate(`/readdit/comments/${post._id}`);
   };
 

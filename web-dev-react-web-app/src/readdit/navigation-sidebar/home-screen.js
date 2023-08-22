@@ -12,7 +12,7 @@ function HomeScreen() {
   const sortPosts = (method) => {
     if (!currentUser) {
       // user not logged in, show prompt
-      alert("Please login to continue");
+      alert("Please login to sort posts");
       return;
     }
     setSortMethod(method);

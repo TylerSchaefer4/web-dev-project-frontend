@@ -7,11 +7,17 @@ import { useDispatch } from "react-redux";
 import { setSearchQuery } from "./searchSlice";
 import { useNavigate } from "react-router-dom";
 import { findPostsSearchThunk } from "../services/posts-thunks";
+import { useLocation } from "react-router-dom";
 
 import "./index.css";
 
 const SearchBar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const queryParams = new URLSearchParams(location.search);
+  const initialSearchValue = queryParams.get("criteria") || "";
+  // console.log("InitSearch", initialSearchValue);
 
   // Simulating a logged-in user for now:
   const user = {
@@ -19,7 +25,7 @@ const SearchBar = () => {
     profilePicture: ReadditLogo,
   };
 
-  const [searchQuery, setSearchInput] = useState("");
+  const [searchQuery, setSearchInput] = useState(initialSearchValue);
   const dispatch = useDispatch();
 
   //   const handleSearch = (e) => {
@@ -41,7 +47,9 @@ const SearchBar = () => {
   }, []);
 
   const handleSearch = (e) => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     dispatch(findPostsSearchThunk(searchQuery));
     console.log("searchQuery:", searchQuery);
     if (searchQuery === "") {
@@ -50,6 +58,12 @@ const SearchBar = () => {
       navigate(`/readdit/search?criteria=${encodeURIComponent(searchQuery)}`);
     }
   };
+
+  useEffect(() => {
+    if (initialSearchValue) {
+      handleSearch();
+    }
+  }, [dispatch, initialSearchValue]);
 
   return (
     <div>

@@ -31,7 +31,7 @@ function ProfileScreen() {
 
     if (currentUser) {
       dispatch(fetchFollowersThunk(currentUser._id)); // Fetch followers
-      dispatch(fetchFollowingThunk(currentUser._id)); // Fetch following
+      // dispatch(fetchFollowingThunk(currentUser._id)); // Fetch following
 
       const loadProfile = async () => {
         const { payload } = await dispatch(profileThunk(currentUser._id));
@@ -44,8 +44,8 @@ function ProfileScreen() {
       navigate("/readdit/login");
     }
 
-    console.log("followers: ", followers);
-    console.log("following: ", following);
+    // console.log("followers: ", followers);
+    // console.log("following: ", following);
   }, [dispatch, currentUser, navigate, profile]);
   return (
     <div>

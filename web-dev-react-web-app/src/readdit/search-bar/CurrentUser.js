@@ -16,16 +16,15 @@ const CurrentUser = ({ user }) => {
   const images = importAll(
     require.context("./user-icons", false, /\.(png|jpe?g|svg)$/)
   );
-  // Generate a random index
-  const randomIndex = Math.floor(Math.random() * images.length);
 
-  // Pick a random image from the images array
-  const randomImage = images[randomIndex];
+  const num = currentUser?.iconId ?? Math.floor(Math.random() * 10) + 1;
+  // const randomIndex = matchedUser.iconId;
+  const randomImage = images[num];
   return (
     <Link to={currentUser ? `/readdit/profile` : "/readdit/login"}>
       <div className="current-user">
         <img
-          src={currentUser ? usericon1 : defaultUserIcon}
+          src={currentUser ? randomImage : defaultUserIcon}
           alt="User Icon"
           className="user-icon"
         />
